@@ -73,7 +73,7 @@ jobs:
           java-version: '17'
 
       - name: Gerar .jar com Maven
-        run: mvn package
+        run: mvn packageee
 
   deploy:
     name: Simulando Deploy
