@@ -39,7 +39,7 @@ jobs:
 
   lint-and-test:
     name: Lintagem e Testes
-    uses: ./.github/workflows/lint-and-test.yml  # Chama o workflow reutilizável
+    uses: ./.github/workflows/lint-and-test.yml
     needs: build
     secrets: inherit
 
