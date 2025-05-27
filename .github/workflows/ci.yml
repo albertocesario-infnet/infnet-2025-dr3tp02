@@ -12,6 +12,17 @@ on:
     paths:
       - 'src/**'
   workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Executar testes?'
+        required: true
+        default: 'true'
+        type: boolean
+      run_lint:
+        description: 'Executar lint?'
+        required: true
+        default: 'true'
+        type: boolean
 
 jobs:
   checkout:
@@ -39,8 +50,12 @@ jobs:
 
   lint-and-test:
     name: Lintagem e Testes
-    uses: ./.github/workflows/lint-and-test.yml  # Chama o workflow reutilizável
+    uses: ./.github/workflows/lint-and-test.yml
     needs: build
+    if: ${{ (github.event.inputs.run_lint == 'true') || (github.event.inputs.run_tests == 'true') }}
+    with:
+      run_lint: ${{ github.event.inputs.run_lint }}
+      run_tests: ${{ github.event.inputs.run_tests }}
     secrets: inherit
 
   package:

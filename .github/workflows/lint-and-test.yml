@@ -2,11 +2,19 @@ name: LINT AND TEST
 
 on:
   workflow_call:
+    inputs:
+      run_tests:
+        required: true
+        type: boolean
+      run_lint:
+        required: true
+        type: boolean
 
 jobs:
   lint:
     name: Verificar estilo do código (Lint)
     runs-on: ubuntu-latest
+    if: ${{ inputs.run_lint == true }}
 
     steps:
       - name: Checkout do código
@@ -24,7 +32,9 @@ jobs:
   test:
     name: Executar testes
     runs-on: ubuntu-latest
+    if: ${{ inputs.run_tests == true }}
     needs: lint
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
