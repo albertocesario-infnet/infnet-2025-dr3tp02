@@ -17,10 +17,12 @@ on:
         description: 'Executar testes?'
         required: true
         default: 'true'
+        type: string
       run_lint:
         description: 'Executar lint?'
         required: true
         default: 'true'
+        type: string
 
 jobs:
   checkout:
