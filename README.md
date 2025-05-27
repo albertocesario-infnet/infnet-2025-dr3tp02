@@ -16,9 +16,9 @@ git push -u origin main
 ```
 
 ### Workflows
-##### ci.yml
-##### hello.yml
-##### lint-and-test.yml
+- ci.yml
+- hello.yml
+- lint-and-test.yml
 
 ### Teste de simulação de erro
 
@@ -28,3 +28,9 @@ Após realizar o push, o pipeline falhou como esperado.
 Para identificar o erro, acessei a aba Actions do GitHub, selecionei a execução que falhou e naveguei até os logs do job com status vermelho. 
 Nos logs, foi possível visualizar que o erro ocorreu no step chamado “Gerar .jar com Maven”, que retornava a mensagem:
 Unknown lifecycle phase "packageee".
+
+### Observações sobre Execuções do Pipeline
+
+Na execução automática, não há escolha dos parâmetros — ela segue o fluxo completo predefinido. 
+Na execução manual, há controle sobre quais etapas executar, tornando o processo mais ágil e adaptável para situações específicas, como testar apenas uma parte do projeto.
+
