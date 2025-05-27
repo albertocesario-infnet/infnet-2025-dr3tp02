@@ -54,8 +54,8 @@ jobs:
     needs: build
     if: ${{ (github.event.inputs.run_lint == 'true') || (github.event.inputs.run_tests == 'true') }}
     with:
-      run_lint: 'true'
-      run_tests: 'true'
+      run_lint: true
+      run_tests: true
     secrets: inherit        
 
   package:
