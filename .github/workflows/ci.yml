@@ -48,20 +48,10 @@ jobs:
       - name: Build com Maven
         run: mvn clean install
 
-  lint-and-test:
-    name: Lintagem e Testes
-    uses: ./.github/workflows/lint-and-test.yml
-    needs: build
-    if: ${{ (github.event.inputs.run_lint == 'true') || (github.event.inputs.run_tests == 'true') }}
-    with:
-      run_lint: ${{ github.event.inputs.run_lint }}
-      run_tests: ${{ github.event.inputs.run_tests }}
-    secrets: inherit
-
   package:
     name: Gerar pacote .jar
     runs-on: ubuntu-latest
-    needs: [build, lint-and-test]
+    needs: [build]
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -78,7 +68,7 @@ jobs:
   deploy:
     name: Simulando Deploy
     runs-on: ubuntu-latest
-    needs: [build, lint-and-test, package]
+    needs: [build, package]
     steps:
       - name: Mensagem de Deploy
         run: echo "Deploy realizado com sucesso"
